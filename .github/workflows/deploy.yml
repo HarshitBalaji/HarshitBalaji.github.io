@@ -1,4 +1,4 @@
-name: Deploy Vite React App to GitHub Pages
+name: Deploy React Vite App to GitHub Pages
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout source code
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -21,11 +21,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Vite App
+      - name: Build React Vite app
         run: npm run build
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages (external repo)
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.GH_PAT }}
+          external_repository: HarshitBalaji/HarshitBalaji.github.io
+          publish_branch: gh-pages
           publish_dir: ./dist
+          user_name: harshitbalaji
+          user_email: sai.harshitbalaji@gmail.com
